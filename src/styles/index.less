@@ -1,0 +1,52 @@
+@import "./antd.less";
+@import "./transiton.less";
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background: #fff;
+}
+
+.action-box {
+  white-space: nowrap;
+  font-weight: bold;
+  .ant-btn:not(:last-child) {
+    margin-right: 5px;
+  }
+  & > span {
+    cursor: pointer;
+    padding: 5px;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .primary {
+    color: #1890ff;
+  }
+  .danger {
+    color: #f5222d;
+  }
+  .warn {
+    color: #ff9900;
+  }
+  .success {
+    color: #1aad19;
+  }
+}
+.add-btn {
+  margin-bottom: 20px;
+}
+.ant-table {
+  tr {
+    th,
+    td {
+      text-align: center !important;
+    }
+  }
+}
+.vue-upload-container {
+  line-height: 1.5;
+  .upload-card {
+    border: 1px dashed #dbdbdb;
+  }
+}
