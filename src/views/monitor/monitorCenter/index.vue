@@ -1,6 +1,6 @@
 <template>
   <page-layout>
-    <a-card title="数据统计" style="margin-bottom: 20px">
+    <a-card title="数据统计" style="margin-bottom: 20px" extra="2010/10/10-2020/10/10">
       <a-card-grid style="width:25%;text-align:center">
         <a-statistic class="item" title="运行错误(今日)" :value="112893" />
       </a-card-grid>
@@ -8,16 +8,16 @@
         <a-statistic class="item" title="资源错误(今日)" :value="112893" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="运行错误(总数)" :value="112893" />
-      </a-card-grid>
-      <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="资源错误(总数)" :value="112893" />
-      </a-card-grid>
-      <a-card-grid style="width:25%;text-align:center">
         <a-statistic class="item" title="影响人数(今日)" :value="112893" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
         <a-statistic class="item" title="影响页面(今日)" :value="112893" />
+      </a-card-grid>
+      <a-card-grid style="width:25%;text-align:center">
+        <a-statistic class="item" title="运行错误(总数)" :value="112893" />
+      </a-card-grid>
+      <a-card-grid style="width:25%;text-align:center">
+        <a-statistic class="item" title="资源错误(总数)" :value="112893" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
         <a-statistic class="item" title="影响人数(总数)" :value="112893" />
@@ -92,9 +92,9 @@ export default {
   & /deep/ .ant-card-body {
     padding: 12px;
   }
-}
-.chart {
-  height: 310px;
-  position: relative;
+  & /deep/ .chart {
+    height: 310px;
+    position: relative;
+  }
 }
 </style>

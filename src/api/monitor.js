@@ -20,3 +20,9 @@ export function loaderrors(params) {
     params
   });
 }
+
+export function projects() {
+  return request({
+    url: `/api/monitor/projects`
+  });
+}
