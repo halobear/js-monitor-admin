@@ -1,29 +1,34 @@
 <template>
   <page-layout>
-    <a-card title="数据统计" style="margin-bottom: 20px" extra="2010/10/10-2020/10/10">
+    <a-card
+      title="数据统计"
+      style="margin-bottom: 20px"
+      :extra="statistics.start_time ? `${statistics.start_time} - ${statistics.end_time}` : ''"
+      :loading="!isLoad"
+    >
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="运行错误(今日)" :value="112893" />
+        <a-statistic class="item" title="运行错误(今日)" :value="statistics.jsErrorTodayTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="资源错误(今日)" :value="112893" />
+        <a-statistic class="item" title="资源错误(今日)" :value="statistics.assetErrorTodayTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响人数(今日)" :value="112893" />
+        <a-statistic class="item" title="影响人数(今日)" :value="statistics.personEffetTodayTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响页面(今日)" :value="112893" />
+        <a-statistic class="item" title="影响页面(今日)" :value="statistics.fromTodayTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="运行错误(总数)" :value="112893" />
+        <a-statistic class="item" title="运行错误(总数)" :value="statistics.jsErrorTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="资源错误(总数)" :value="112893" />
+        <a-statistic class="item" title="资源错误(总数)" :value="statistics.assetErrorTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响人数(总数)" :value="112893" />
+        <a-statistic class="item" title="影响人数(总数)" :value="statistics.personEffetTotal" />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响页面(总数)" :value="112893" />
+        <a-statistic class="item" title="影响页面(总数)" :value="statistics.fromTotal" />
       </a-card-grid>
     </a-card>
     <a-row :gutter="12">
@@ -53,6 +58,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import PieChart from './PieChart';
 import LineChart from './LineChart';
 
@@ -66,11 +72,16 @@ export default {
       isLoad: false,
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.isLoad = true;
-    }, 500);
+  computed: {
+    ...mapState({
+      statistics: (state) => state.monitor.statistics,
+    }),
   },
+  async mounted() {
+    await this.$store.dispatch('fetchMonitorStatistics');
+    this.isLoad = true;
+  },
+  methods: {},
 };
 </script>
 

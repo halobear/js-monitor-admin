@@ -26,3 +26,9 @@ export function projects() {
     url: `/api/monitor/projects`
   });
 }
+
+export function statistics() {
+  return request({
+    url: `/api/monitor/statistics`
+  });
+}
