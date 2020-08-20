@@ -6,6 +6,9 @@ import Vue from "vue";
 import Antd from "ant-design-vue";
 import photoSwipe from "kuan-vue-photoswipe";
 import VueAwesomeSwiper from "vue-awesome-swiper";
+import VeLine from "v-charts/lib/line.common";
+import VeBar from "v-charts/lib/bar.common";
+import VePie from "v-charts/lib/pie.common";
 
 import request from "./utils/request";
 import router from "./router";
@@ -26,6 +29,9 @@ Vue.filter("timeAgo", timeAgo);
 Vue.mixin(mixins); // mixins
 Vue.use(Antd); // antd vue
 Vue.use(VueAwesomeSwiper);
+Vue.component(VeLine.name, VeLine);
+Vue.component(VeBar.name, VeBar);
+Vue.component(VePie.name, VePie);
 Vue.component("page-layout", PageLayout);
 Vue.use(photoSwipe); // 多图预览
 Vue.use(components); // 全局组件

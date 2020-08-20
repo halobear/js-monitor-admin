@@ -28,23 +28,23 @@
     </a-card>
     <a-row :gutter="12">
       <a-col :md="24" :xl="6" style="margin-bottom: 20px">
-        <a-card title="扇形图" extra="今日">
+        <a-card title="扇形图" extra="今日" class="chart-card">
           <div class="chart">
-            <a-statistic class="item" title="运行错误(今日)" :value="112893" />
+            <pie-chart v-if="isLoad" />
           </div>
         </a-card>
       </a-col>
       <a-col :md="24" :xl="9" style="margin-bottom: 20px">
-        <a-card title="运行错误" extra="近10天">
+        <a-card title="运行错误" extra="近10天" class="chart-card">
           <div class="chart">
-            <a-statistic class="item" title="资源错误(今日)" :value="112893" />
+            <line-chart />
           </div>
         </a-card>
       </a-col>
       <a-col :md="24" :xl="9" style="margin-bottom: 20px">
-        <a-card title="资源错误" extra="近10天">
+        <a-card title="资源错误" extra="近10天" class="chart-card">
           <div class="chart">
-            <a-statistic class="item" title="运行错误(今日)" :value="112893" />
+            <line-chart />
           </div>
         </a-card>
       </a-col>
@@ -53,8 +53,24 @@
 </template>
 
 <script>
+import PieChart from './PieChart';
+import LineChart from './LineChart';
+
 export default {
-  components: {},
+  components: {
+    PieChart,
+    LineChart,
+  },
+  data() {
+    return {
+      isLoad: false,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoad = true;
+    }, 300);
+  },
 };
 </script>
 
@@ -72,7 +88,13 @@ export default {
     }
   }
 }
+.chart-card {
+  & /deep/ .ant-card-body {
+    padding: 12px;
+  }
+}
 .chart {
-  height: 250px;
+  height: 310px;
+  position: relative;
 }
 </style>
