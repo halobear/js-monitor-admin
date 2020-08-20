@@ -28,21 +28,21 @@
     </a-card>
     <a-row :gutter="12">
       <a-col :md="24" :xl="6" style="margin-bottom: 20px">
-        <a-card title="扇形图" extra="今日" class="chart-card">
+        <a-card title="扇形图" extra="今日" class="chart-card" :loading="!isLoad">
           <div class="chart">
-            <pie-chart v-if="isLoad" />
+            <pie-chart />
           </div>
         </a-card>
       </a-col>
       <a-col :md="24" :xl="9" style="margin-bottom: 20px">
-        <a-card title="运行错误" extra="近10天" class="chart-card">
+        <a-card title="运行错误" extra="近10天" class="chart-card" :loading="!isLoad">
           <div class="chart">
             <line-chart />
           </div>
         </a-card>
       </a-col>
       <a-col :md="24" :xl="9" style="margin-bottom: 20px">
-        <a-card title="资源错误" extra="近10天" class="chart-card">
+        <a-card title="资源错误" extra="近10天" class="chart-card" :loading="!isLoad">
           <div class="chart">
             <line-chart />
           </div>
@@ -69,7 +69,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.isLoad = true;
-    }, 300);
+    }, 500);
   },
 };
 </script>
