@@ -7,6 +7,13 @@ export function all(params) {
   });
 }
 
+export function jserrors(params) {
+  return request({
+    url: `/api/monitor/jserrors`,
+    params
+  });
+}
+
 export function loaderrors(params) {
   return request({
     url: `/api/monitor/loaderrors`,
