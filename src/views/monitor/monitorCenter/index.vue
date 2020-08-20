@@ -9,6 +9,7 @@
             <span class="pointer">{{text.length > 30 ? `${text.slice(0, 30)}...` : text}}</span>
           </a-tooltip>
         </template>
+        <template #create_time="text">{{text | timeAgo}}</template>
         <template #action="text,record">
           <div class="action-box">
             <span @click="remove(record)" class="danger">删除</span>
@@ -30,8 +31,9 @@ const columns = [
   { title: '用户', dataIndex: 'uid' },
   { title: '错误类型', dataIndex: 'type', scopedSlots: { customRender: 'type' } },
   { title: '来源', dataIndex: 'from', scopedSlots: { customRender: 'tooltip' } },
+  { title: '错误', dataIndex: 'brief', scopedSlots: { customRender: 'tooltip' } },
   { title: '详情', dataIndex: 'stack', scopedSlots: { customRender: 'tooltip' } },
-  { title: '时间', dataIndex: 'create_time' },
+  { title: '时间', dataIndex: 'create_time', scopedSlots: { customRender: 'create_time' } },
   { title: '操作', scopedSlots: { customRender: 'action' } },
 ];
 

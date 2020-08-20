@@ -7,7 +7,7 @@ export default [
     name: "testRoot",
     meta: { title: "测试路由", icon: "usb" },
     component: RouteView,
-    hidden: process.env.NODE_ENV !== "development",
+    hidden: true,
     hideChildrenInMenu: true,
     redirect: { name: "test" },
     children: [

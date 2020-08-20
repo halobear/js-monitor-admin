@@ -6,3 +6,10 @@ export function all(params) {
     params
   });
 }
+
+export function loaderrors(params) {
+  return request({
+    url: `/api/monitor/loaderrors`,
+    params
+  });
+}
