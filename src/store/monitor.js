@@ -13,7 +13,9 @@ const state = {
     personEffetTotal: 0,
     start_time: "",
     end_time: "",
-    typesTotal: []
+    typesTotal: [],
+    jsErrorDatas: [],
+    assetErrorDatas: []
   }
 };
 

@@ -2,6 +2,7 @@
   <ve-pie height="300px" :data="chartData" :settings="chartSettings"></ve-pie>
 </template>
 
+
 <script>
 export default {
   props: {

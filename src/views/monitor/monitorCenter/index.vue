@@ -42,14 +42,14 @@
       <a-col :md="24" :xl="9" style="margin-bottom: 20px">
         <a-card title="运行错误" extra="近10天" class="chart-card" :loading="!isLoad">
           <div class="chart">
-            <line-chart />
+            <line-chart :data="jsErrorDatas" />
           </div>
         </a-card>
       </a-col>
       <a-col :md="24" :xl="9" style="margin-bottom: 20px">
         <a-card title="资源错误" extra="近10天" class="chart-card" :loading="!isLoad">
           <div class="chart">
-            <line-chart />
+            <line-chart :data="assetErrorDatas" color="#FACC14" />
           </div>
         </a-card>
       </a-col>
@@ -73,6 +73,18 @@ export default {
     ...mapState({
       statistics: (state) => state.monitor.statistics,
     }),
+    assetErrorDatas() {
+      return [...(this.statistics.assetErrorDatas || [])].reverse().map((item) => ({
+        ...item,
+        总数: item.total,
+      }));
+    },
+    jsErrorDatas() {
+      return [...(this.statistics.jsErrorDatas || [])].reverse().map((item) => ({
+        ...item,
+        总数: item.total,
+      }));
+    },
     isLoad() {
       return !!this.statistics.start_time;
     },
