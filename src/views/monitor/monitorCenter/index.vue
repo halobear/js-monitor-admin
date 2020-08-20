@@ -35,7 +35,7 @@
       <a-col :md="24" :xl="6" style="margin-bottom: 20px">
         <a-card title="扇形图" extra="今日" class="chart-card" :loading="!isLoad">
           <div class="chart">
-            <pie-chart />
+            <pie-chart :data="pieChartData" />
           </div>
         </a-card>
       </a-col>
@@ -59,6 +59,8 @@
 
 <script>
 import { mapState } from 'vuex';
+import { ERROR_TYPES } from '@/constants/monitor';
+
 import PieChart from './PieChart';
 import LineChart from './LineChart';
 
@@ -67,19 +69,23 @@ export default {
     PieChart,
     LineChart,
   },
-  data() {
-    return {
-      isLoad: false,
-    };
-  },
   computed: {
     ...mapState({
       statistics: (state) => state.monitor.statistics,
     }),
+    isLoad() {
+      return !!this.statistics.start_time;
+    },
+    pieChartData() {
+      const { typesTotal = [] } = this.statistics;
+      return typesTotal.map((item) => ({
+        type: ERROR_TYPES[item.type] || '未知',
+        total: item.total,
+      }));
+    },
   },
   async mounted() {
     await this.$store.dispatch('fetchMonitorStatistics');
-    this.isLoad = true;
   },
   methods: {},
 };

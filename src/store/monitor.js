@@ -12,7 +12,8 @@ const state = {
     personEffetTodayTotal: 0,
     personEffetTotal: 0,
     start_time: "",
-    end_time: ""
+    end_time: "",
+    typesTotal: []
   }
 };
 
