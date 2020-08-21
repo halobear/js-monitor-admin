@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as Api from '@/api/monitor';
 
 import { ERROR_TYPES } from '@/constants/monitor';
@@ -55,12 +56,20 @@ export default {
       columns,
     };
   },
+  computed: {
+    ...mapState({
+      pid: (state) => state.user.user.pid,
+    }),
+  },
   mounted() {
     this.fetchData();
   },
   methods: {
     async fetchData() {
-      const { list = [], total = 0 } = await Api.jserrors(this.payload);
+      const { list = [], total = 0 } = await Api.jserrors({
+        ...this.payload,
+        pid: this.pid,
+      });
       this.list = list;
       this.total = total;
     },

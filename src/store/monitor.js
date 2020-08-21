@@ -28,9 +28,10 @@ const mutations = {
 const actions = {
   async fetchProjects({ commit, state }) {
     if (state.projects.length) return;
-    const data = await Api.projects();
+    const projects = await Api.projects();
+    projects.forEach((item, key) => (item.id = key + 1));
     commit("SET_MONITOR", {
-      projects: data.map(item => item.pid)
+      projects
     });
   },
   async fetchMonitorStatistics({ commit }, pid) {

@@ -13,7 +13,7 @@
             :value="user.pid"
             @change="changePid"
           >
-            <a-select-option v-for="(item) in projects" :key="item">{{item}}</a-select-option>
+            <a-select-option v-for="(item) in projects" :key="item.pid">{{item.pid}}</a-select-option>
           </a-select>
           <a-dropdown style="display: inline-block; height: 100%; vertical-align: initial">
             <span style="cursor: pointer">

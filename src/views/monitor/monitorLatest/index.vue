@@ -42,10 +42,9 @@ import * as Api from '@/api/monitor';
 import { ERROR_TYPES } from '@/constants/monitor';
 
 const columns = [
-  { title: '项目', dataIndex: 'pid' },
+  { title: '错误', dataIndex: 'brief', scopedSlots: { customRender: 'tooltip' } },
   { title: '用户', dataIndex: 'uid', scopedSlots: { customRender: 'uid' } },
   { title: '类型', dataIndex: 'type', scopedSlots: { customRender: 'type' } },
-  { title: '错误', dataIndex: 'brief', scopedSlots: { customRender: 'tooltip' } },
   { title: '详情', dataIndex: 'stack', scopedSlots: { customRender: 'tooltip' } },
   { title: '时间', dataIndex: 'create_time', scopedSlots: { customRender: 'create_time' } },
   { title: '来源', dataIndex: 'from', scopedSlots: { customRender: 'from' } },
@@ -69,6 +68,7 @@ export default {
   },
   computed: {
     ...mapState({
+      pid: (state) => state.user.user.pid,
       projects: (state) => state.monitor.projects,
     }),
     tabs() {
@@ -83,11 +83,8 @@ export default {
   },
   methods: {
     async fetchData() {
-      const { page, size, pid, uid } = this.payload;
-      const params = { page, size };
-      if (pid && pid !== '全部') {
-        params.pid = pid;
-      }
+      const { page, size, uid } = this.payload;
+      const params = { page, size, pid: this.pid };
       if (uid) params.uid = uid;
       const { list = [], total = 0 } = await Api.all(params);
       this.list = list;

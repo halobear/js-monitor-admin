@@ -2,19 +2,17 @@
   <div class="projects">
     <global-header class="headers" />
     <a-card class="project-container" title="项目列表">
-      <a-empty description="没有项目" v-if="!projects.length" />
-      <a-list bordered :data-source="projects">
-        <template #renderItem="item">
-          <a-list-item>
-            <div class="item">
-              <span>{{ item }}</span>
-              <div class="action-box">
-                <span :class="{primary: user.pid === item}" @click="choose(item)">查看</span>
-              </div>
-            </div>
-          </a-list-item>
+      <a-table :dataSource="projects" :columns="columns" rowKey="id">
+        <template #error="text">
+          <span v-if="text" class="red">{{text}}</span>
+          <span v-else class="gray">{{text}}</span>
         </template>
-      </a-list>
+        <template #action="text,row">
+          <div class="action-box">
+            <span :class="{primary: user.pid === row.pid}" @click="choose(row.pid)">查看</span>
+          </div>
+        </template>
+      </a-table>
     </a-card>
   </div>
 </template>
@@ -23,18 +21,27 @@
 import { mapState } from 'vuex';
 import GlobalHeader from '@/layouts/components/GlobalHeader';
 
+const columns = [
+  { title: '序号', dataIndex: 'id' },
+  { title: '项目名称', dataIndex: 'pid' },
+  { title: '今日错误数', dataIndex: 'error', scopedSlots: { customRender: 'error' } },
+  { title: '操作', scopedSlots: { customRender: 'action' } },
+];
+
 export default {
   components: {
     GlobalHeader,
+  },
+  data() {
+    return {
+      columns,
+    };
   },
   computed: {
     ...mapState({
       user: (state) => state.user.user,
       projects: (state) => state.monitor.projects,
     }),
-  },
-  mounted() {
-    this.$store.dispatch('fetchProjects');
   },
   methods: {
     toHome() {
@@ -79,5 +86,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.gray {
+  color: #999;
+}
+.red {
+  color: #f5222d;
 }
 </style>

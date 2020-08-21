@@ -97,13 +97,6 @@ export default {
           total: 0,
         }));
       }
-      console.log(
-        2,
-        typesTotal.map((item) => ({
-          type: ERROR_TYPES[item.type] || '未知',
-          total: item.total,
-        }))
-      );
       return typesTotal.map((item) => ({
         type: ERROR_TYPES[item.type] || '未知',
         total: item.total,
