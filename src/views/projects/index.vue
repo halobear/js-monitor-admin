@@ -3,7 +3,7 @@
     <global-header class="headers" />
     <a-card class="project-container" title="项目列表">
       <a-table :dataSource="projects" :columns="columns" rowKey="id">
-        <template #error="text">
+        <template #todayError="text">
           <span v-if="text" class="red">{{text}}</span>
           <span v-else class="gray">{{text}}</span>
         </template>
@@ -24,7 +24,8 @@ import GlobalHeader from '@/layouts/components/GlobalHeader';
 const columns = [
   { title: '序号', dataIndex: 'id' },
   { title: '项目名称', dataIndex: 'pid' },
-  { title: '今日错误数', dataIndex: 'error', scopedSlots: { customRender: 'error' } },
+  { title: '所有错误', dataIndex: 'error' },
+  { title: '今日错误', dataIndex: 'todayError', scopedSlots: { customRender: 'todayError' } },
   { title: '操作', scopedSlots: { customRender: 'action' } },
 ];
 
