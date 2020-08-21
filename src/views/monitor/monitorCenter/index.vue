@@ -72,6 +72,7 @@ export default {
   computed: {
     ...mapState({
       statistics: (state) => state.monitor.statistics,
+      user: (state) => state.user.user,
     }),
     assetErrorDatas() {
       return [...(this.statistics.assetErrorDatas || [])].reverse().map((item) => ({
@@ -90,16 +91,33 @@ export default {
     },
     pieChartData() {
       const { typesTotal = [] } = this.statistics;
+      if (!typesTotal.length) {
+        return Object.values(ERROR_TYPES).map((type) => ({
+          type,
+          total: 0,
+        }));
+      }
+      console.log(
+        2,
+        typesTotal.map((item) => ({
+          type: ERROR_TYPES[item.type] || '未知',
+          total: item.total,
+        }))
+      );
       return typesTotal.map((item) => ({
         type: ERROR_TYPES[item.type] || '未知',
         total: item.total,
       }));
     },
   },
-  async mounted() {
-    await this.$store.dispatch('fetchMonitorStatistics');
+  mounted() {
+    this.fetchData();
   },
-  methods: {},
+  methods: {
+    fetchData() {
+      this.$store.dispatch('fetchMonitorStatistics', this.user.pid);
+    },
+  },
 };
 </script>
 

@@ -3,7 +3,7 @@
     <template #action>
       <a-tag closable v-if="payload.uid" @close="changeUser('')">{{payload.uid}}</a-tag>
     </template>
-    <a-card :tab-list="tabs" :active-tab-key="payload.pid || '全部'" @tabChange="changeTab">
+    <a-card>
       <a-table :pagination="false" rowKey="id" :dataSource="list" :columns="columns">
         <template #tooltip="text">
           <a-tooltip>
@@ -80,7 +80,6 @@ export default {
   },
   mounted() {
     this.fetchData();
-    this.$store.dispatch('fetchProjects');
   },
   methods: {
     async fetchData() {

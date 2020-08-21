@@ -27,8 +27,9 @@ export function projects() {
   });
 }
 
-export function statistics() {
+export function statistics(pid) {
   return request({
-    url: `/api/monitor/statistics`
+    url: `/api/monitor/statistics`,
+    params: { pid }
   });
 }

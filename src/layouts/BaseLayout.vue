@@ -16,6 +16,7 @@
       <!-- layout content -->
       <a-layout-content
         :style="{ height: '100%', position: 'relative', margin: '24px 24px 0', paddingTop:  '0' }"
+        :key="pid"
       >
         <route-view :key="routerKey" />
       </a-layout-content>
@@ -52,6 +53,7 @@ export default {
       // 动态主路由
       mainMenu: (state) => state.permission.routers,
       collapsed: (state) => state.app.collapsed,
+      pid: (state) => state.user.user.pid || 1,
     }),
     menus() {
       const routes = convertRoutes(this.mainMenu.find((item) => item.path === '/')) || {};

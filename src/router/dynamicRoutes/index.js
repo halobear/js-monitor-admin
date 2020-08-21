@@ -27,8 +27,15 @@ export default [
     name: "index",
     component: BaseLayout,
     meta: { title: "幻熊科技" },
-    redirect: "home",
+    redirect: "projects",
     children: routes
+  },
+  {
+    path: "/projects",
+    name: "projects",
+    meta: { title: "项目列表" },
+    hidden: true,
+    component: () => import("@/views/projects")
   },
   {
     path: "*",

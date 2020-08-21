@@ -33,8 +33,8 @@ const actions = {
       projects: data.map(item => item.pid)
     });
   },
-  async fetchMonitorStatistics({ commit }) {
-    const statistics = await Api.statistics();
+  async fetchMonitorStatistics({ commit }, pid) {
+    const statistics = await Api.statistics(pid);
     commit("SET_MONITOR", { statistics });
   }
 };
