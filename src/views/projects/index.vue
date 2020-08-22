@@ -7,9 +7,16 @@
           <span v-if="text" class="red">{{text}}</span>
           <span v-else class="gray">{{text}}</span>
         </template>
+        <template #time="text">
+          {{text}}
+          <span class="lable">ms</span>
+        </template>
         <template #action="text,row">
           <div class="action-box">
-            <span :class="{primary: user.pid === row.pid}" @click="choose(row.pid)">查看</span>
+            <span
+              :class="{primary: user.pid === row.pid}"
+              @click="choose(row.pid)"
+            >查看</span>
           </div>
         </template>
       </a-table>
@@ -24,8 +31,22 @@ import GlobalHeader from '@/layouts/components/GlobalHeader';
 const columns = [
   { title: '序号', dataIndex: 'id' },
   { title: '项目名称', dataIndex: 'pid' },
+  {
+    title: '白屏时间',
+    dataIndex: 'white_time',
+    scopedSlots: { customRender: 'time' },
+  },
+  {
+    title: '加载时间',
+    dataIndex: 'load_time',
+    scopedSlots: { customRender: 'time' },
+  },
   { title: '所有错误', dataIndex: 'error' },
-  { title: '今日错误', dataIndex: 'todayError', scopedSlots: { customRender: 'todayError' } },
+  {
+    title: '今日错误',
+    dataIndex: 'todayError',
+    scopedSlots: { customRender: 'todayError' },
+  },
   { title: '操作', scopedSlots: { customRender: 'action' } },
 ];
 
@@ -93,5 +114,9 @@ export default {
 }
 .red {
   color: #f5222d;
+}
+.lable {
+  color: #999;
+  font-size: 12px;
 }
 </style>
