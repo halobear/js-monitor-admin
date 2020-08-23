@@ -17,6 +17,7 @@
               :class="{primary: user.pid === row.pid}"
               @click="choose(row.pid)"
             >查看</span>
+            <span class="danger" @click="remove(row.pid)">删除</span>
           </div>
         </template>
       </a-table>
@@ -27,6 +28,7 @@
 <script>
 import { mapState } from 'vuex';
 import GlobalHeader from '@/layouts/components/GlobalHeader';
+import * as Api from '@/api/monitor';
 
 const columns = [
   { title: '序号', dataIndex: 'id' },
@@ -79,6 +81,18 @@ export default {
         this.$router.push({
           name: 'monitor',
         });
+      });
+    },
+    remove(pid) {
+      this.$confirm({
+        title: '请确认',
+        content: '删除后将无法恢复',
+        onOk: async () => {
+          await Api.removeProjects(pid);
+          this.$message.success('删除成功');
+          const projects = this.projects.filter((item) => item.pid !== pid);
+          this.$store.commit('SET_MONITOR', { projects });
+        },
       });
     },
   },

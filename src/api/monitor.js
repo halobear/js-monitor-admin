@@ -27,6 +27,14 @@ export function projects() {
   });
 }
 
+export function removeProjects(pid) {
+  return request({
+    url: `/api/monitor/projects`,
+    method: "delete",
+    params: { pid }
+  });
+}
+
 export function statistics(pid) {
   return request({
     url: `/api/monitor/statistics`,
