@@ -5,7 +5,13 @@
     </ul>
     <div class="login-wrap">
       <div class="title">{{title}}</div>
-      <a-form-model class="form-model" ref="form" :model="form" :rules="rules">
+      <a-form-model
+        class="form-model"
+        ref="form"
+        :model="form"
+        :rules="rules"
+        @submit.prevent="onSubmit"
+      >
         <a-form-model-item prop="username">
           <a-input size="large" placeholder="请输入账号" v-model="form.username">
             <a-icon slot="prefix" type="user" />
@@ -23,7 +29,12 @@
           </div>
         </a-form-model-item>
         <a-form-model-item>
-          <a-button size="large" style="width: 100%" type="primary" @click="onSubmit">登录</a-button>
+          <a-button
+            size="large"
+            style="width: 100%"
+            type="primary"
+            htmlType="submit"
+          >登录</a-button>
         </a-form-model-item>
       </a-form-model>
       <div v-if="haloPhone" class="halo-phone">客服热线：{{haloPhone}}</div>
