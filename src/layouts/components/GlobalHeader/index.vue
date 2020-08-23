@@ -1,7 +1,7 @@
 <template>
   <transition name="showHeader">
     <a-layout-header class="ant-header-side-closed" :style="{ padding: '0' }">
-      <h1 class="title" v-if="$route.name === 'projects'">幻熊监控系统</h1>
+      <h1 class="title" v-if="$route.name === 'projects' && tilte">{{tilte}}</h1>
       <div class="header">
         <div class="flex1">
           <a-icon
@@ -83,6 +83,7 @@ export default {
   },
   data() {
     return {
+      tilte: process.env.VUE_APP_HOME_TITLE,
       visible: true,
       oldScrollTop: 0,
     };
