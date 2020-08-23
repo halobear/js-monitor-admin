@@ -31,7 +31,6 @@ import GlobalHeader from '@/layouts/components/GlobalHeader';
 import * as Api from '@/api/monitor';
 
 const columns = [
-  { title: '序号', dataIndex: 'id' },
   { title: '项目名称', dataIndex: 'pid' },
   {
     title: '白屏时间',
