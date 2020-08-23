@@ -1,3 +1,4 @@
+import moment from "moment";
 import * as Api from "@/api/monitor";
 
 const state = {
@@ -29,7 +30,12 @@ const actions = {
   async fetchProjects({ commit, state }) {
     if (state.projects.length) return;
     const projects = await Api.projects();
-    projects.forEach((item, key) => (item.id = key + 1));
+    projects.forEach((item, key) => {
+      item.id = key + 1;
+      item.range = `${moment(item.start_time).format("MM/DD")}-${moment(
+        item.end_time
+      ).format("MM/DD")}`;
+    });
     commit("SET_MONITOR", {
       projects
     });

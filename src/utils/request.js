@@ -17,7 +17,10 @@ const request = createApi({
     }
     return headers;
   },
-  loginForce: () => {}
+  loginForce: () => {
+    authority.clear();
+    window.location.reload();
+  }
 });
 
 export default request;

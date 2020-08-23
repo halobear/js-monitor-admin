@@ -1,11 +1,23 @@
 <template>
   <transition name="showHeader">
     <a-layout-header class="ant-header-side-closed" :style="{ padding: '0' }">
+      <h1 class="title" v-if="$route.name === 'projects'">幻熊监控系统</h1>
       <div class="header">
         <div class="flex1">
-          <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle" />
+          <a-icon
+            class="trigger"
+            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+            @click="toggle"
+          />
         </div>
-        <div style="height: 100%;">
+        <div class="right-box">
+          <div
+            class="menu-icon"
+            v-if="$route.name !== 'projects'"
+            @click="toProject"
+          >
+            <a-icon type="menu"></a-icon>
+          </div>
           <a-select
             v-if="projects.length"
             placeholder="选择项目"
@@ -13,9 +25,14 @@
             :value="user.pid"
             @change="changePid"
           >
-            <a-select-option v-for="(item) in projects" :key="item.pid">{{item.pid}}</a-select-option>
+            <a-select-option
+              v-for="(item) in projects"
+              :key="item.pid"
+            >{{item.pid}}</a-select-option>
           </a-select>
-          <a-dropdown style="display: inline-block; height: 100%; vertical-align: initial">
+          <a-dropdown
+            style="display: inline-block; height: 100%; vertical-align: initial"
+          >
             <span style="cursor: pointer">
               <a-avatar
                 v-if="user.avatar"
@@ -80,6 +97,12 @@ export default {
     this.$store.dispatch('fetchProjects');
   },
   methods: {
+    toProject() {
+      if (this.$route.name === 'projects') return;
+      this.$router.push({
+        name: 'projects',
+      });
+    },
     toggle() {
       this.$emit('toggle');
     },
@@ -104,5 +127,26 @@ export default {
 }
 .username {
   padding-left: 0.2em;
+}
+.title {
+  font-size: 18px;
+  font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  vertical-align: middle;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 64px;
+}
+.menu-icon {
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+.right-box {
+  height: 64px;
+  display: flex;
+  align-items: center;
 }
 </style>

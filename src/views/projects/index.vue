@@ -32,6 +32,8 @@ import * as Api from '@/api/monitor';
 
 const columns = [
   { title: '项目名称', dataIndex: 'pid' },
+  { title: '访问人数', dataIndex: 'visitor_total' },
+  { title: '今日访问', dataIndex: 'today_visitor_total' },
   {
     title: '白屏时间',
     dataIndex: 'white_time',
@@ -47,6 +49,10 @@ const columns = [
     title: '今日错误',
     dataIndex: 'todayError',
     scopedSlots: { customRender: 'todayError' },
+  },
+  {
+    title: '统计时间',
+    dataIndex: 'range',
   },
   { title: '操作', scopedSlots: { customRender: 'action' } },
 ];
@@ -113,7 +119,7 @@ export default {
 }
 .project-container {
   max-width: 90%;
-  width: 800px;
+  width: 1000px;
   margin: 20px auto;
 }
 .item {
