@@ -57,8 +57,8 @@ export default {
       title: process.env.VUE_APP_HOME_TITLE,
       haloPhone: process.env.VUE_APP_HALO_PHONE,
       form: {
-        username: isDev ? 'admin' : '',
-        password: isDev ? 'admin' : '',
+        username: isDev ? 'halo-error' : '',
+        password: isDev ? 'haloe0821' : '',
       },
       rules: {
         username: [
