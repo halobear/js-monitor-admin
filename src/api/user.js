@@ -4,7 +4,7 @@ console.log(process.env.VUE_APP_PROXY);
 
 export function login(data) {
   return request({
-    url: "/api/monitor/ogin",
+    url: "/api/monitor/login",
     method: "post",
     data
   });
