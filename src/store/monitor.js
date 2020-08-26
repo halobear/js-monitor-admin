@@ -49,7 +49,7 @@ const actions = {
     commit("SET_MONITOR", { statistics });
   },
   async fetchPerList({ commit }, pid) {
-    const { list } = await Per.list({ size: 1000, pid });
+    const { list } = await Per.list({ size: 300, pid });
     list.forEach(item => {
       item.date = moment(item.create_time).format("MM/DD HH:mm:ss");
       item["加载时间"] = item.load_time;
