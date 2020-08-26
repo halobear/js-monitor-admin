@@ -83,7 +83,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.user.user,
-      performance: (state) => state.monitor.performance,
+      performance: (state) => [...state.monitor.performance].reverse(),
       todayPerformance: (state) => state.monitor.todayPerformance,
       totalPerformance: (state) => state.monitor.totalPerformance,
     }),
