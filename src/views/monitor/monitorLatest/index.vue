@@ -1,14 +1,21 @@
 <template>
-  <page-layout>
-    <template #action>
-      <a-tag closable v-if="payload.uid" @close="changeUser('')">{{payload.uid}}</a-tag>
-    </template>
+  <div>
+    <a-card style="margin-bottom: 18px;" v-if="payload.uid">
+      <a-tag closable @close="changeUser('')">{{payload.uid}}</a-tag>
+    </a-card>
     <a-card>
-      <a-table :pagination="false" rowKey="id" :dataSource="list" :columns="columns">
+      <a-table
+        :pagination="false"
+        rowKey="id"
+        :dataSource="list"
+        :columns="columns"
+      >
         <template #tooltip="text">
           <a-tooltip>
             <template v-if="text.length > 40" slot="title">{{text}}</template>
-            <span class="pointer">{{text.length > 40 ? `${text.slice(0, 40)}...` : text}}</span>
+            <span
+              class="pointer"
+            >{{text.length > 40 ? `${text.slice(0, 40)}...` : text}}</span>
           </a-tooltip>
         </template>
         <template #uid="text">
@@ -31,9 +38,12 @@
         </template>
       </a-table>
 
-      <my-pagination :total="total" :payload="{per_page: payload.size, page: payload.page}" />
+      <my-pagination
+        :total="total"
+        :payload="{per_page: payload.size, page: payload.page}"
+      />
     </a-card>
-  </page-layout>
+  </div>
 </template>
 
 <script>
@@ -42,11 +52,23 @@ import * as Api from '@/api/monitor';
 import { ERROR_TYPES } from '@/constants/monitor';
 
 const columns = [
-  { title: '错误', dataIndex: 'brief', scopedSlots: { customRender: 'tooltip' } },
+  {
+    title: '错误',
+    dataIndex: 'brief',
+    scopedSlots: { customRender: 'tooltip' },
+  },
   { title: '用户', dataIndex: 'uid', scopedSlots: { customRender: 'uid' } },
   { title: '类型', dataIndex: 'type', scopedSlots: { customRender: 'type' } },
-  { title: '详情', dataIndex: 'stack', scopedSlots: { customRender: 'tooltip' } },
-  { title: '时间', dataIndex: 'create_time', scopedSlots: { customRender: 'create_time' } },
+  {
+    title: '详情',
+    dataIndex: 'stack',
+    scopedSlots: { customRender: 'tooltip' },
+  },
+  {
+    title: '时间',
+    dataIndex: 'create_time',
+    scopedSlots: { customRender: 'create_time' },
+  },
   { title: '来源', dataIndex: 'from', scopedSlots: { customRender: 'from' } },
 ];
 

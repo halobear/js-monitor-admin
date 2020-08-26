@@ -15,7 +15,7 @@
 
       <!-- layout content -->
       <a-layout-content
-        :style="{ height: '100%', position: 'relative', margin: '24px 24px 0', paddingTop:  '0' }"
+        :style="{ height: '100%', position: 'relative', margin: '18px 24px 0', paddingTop:  '0' }"
         :key="pid"
       >
         <route-view :key="routerKey" />
@@ -56,7 +56,8 @@ export default {
       pid: (state) => state.user.user.pid || 1,
     }),
     menus() {
-      const routes = convertRoutes(this.mainMenu.find((item) => item.path === '/')) || {};
+      const routes =
+        convertRoutes(this.mainMenu.find((item) => item.path === '/')) || {};
       const { children = [] } = routes;
       return children;
     },

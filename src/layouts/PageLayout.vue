@@ -1,6 +1,7 @@
 <template>
   <div style="margin: -24px -24px 0px">
     <page-header
+      :hideHeader="hideHeader"
       :breadcrumb="breadcrumb"
       :title="title"
       :logo="logo"
@@ -11,9 +12,15 @@
     >
       <slot name="subtitle" slot="subtitle"></slot>
       <slot name="action" slot="action"></slot>
-      <slot v-if="$slots.content && $slots.content.length" slot="content" name="content"></slot>
+      <slot
+        v-if="$slots.content && $slots.content.length"
+        slot="content"
+        name="content"
+      ></slot>
       <div slot="content" v-if="!$slots.content && desc">
-        <p style="font-size: 14px;line-height: 1.5;color: rgba(0,0,0,.65)">{{ desc }}</p>
+        <p
+          style="font-size: 14px;line-height: 1.5;color: rgba(0,0,0,.65)"
+        >{{ desc }}</p>
       </div>
       <slot slot="extra" name="extra"></slot>
     </page-header>
@@ -29,7 +36,16 @@ import PageHeader from './components/PageHeader';
 export default {
   name: 'PageLayout',
   components: { PageHeader },
-  props: ['desc', 'logo', 'title', 'avatar', 'extraImage', 'tabs', 'tab'],
+  props: [
+    'desc',
+    'logo',
+    'title',
+    'avatar',
+    'extraImage',
+    'tabs',
+    'tab',
+    'hideHeader',
+  ],
   data() {
     return {
       breadcrumb: [],

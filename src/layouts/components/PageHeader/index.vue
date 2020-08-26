@@ -1,13 +1,16 @@
 <template>
   <div class="page-header">
     <div class="page-header-wide">
-      <div class="breadcrumb">
+      <div class="breadcrumb" v-if="!hideHeader">
         <a-breadcrumb>
           <a-breadcrumb-item :key="item.path" v-for="(item, i) in breadList">
             <span
               v-if="item.meta.disabledBreadcrumb || breadList.length -1 === i"
             >{{item.meta.title || item.name}}</span>
-            <router-link v-else :to="{path: item.path}">{{item.meta.title || item.name}}</router-link>
+            <router-link
+              v-else
+              :to="{path: item.path}"
+            >{{item.meta.title || item.name}}</router-link>
           </a-breadcrumb-item>
         </a-breadcrumb>
       </div>
@@ -16,7 +19,7 @@
           <a-avatar :src="avatar" />
         </div>
         <div class="main">
-          <div class="row">
+          <div class="row" v-if="!hideHeader">
             <img v-if="logo" :src="logo" class="logo" />
             <div class="middle-flex title-wrap">
               <h1 v-if="titleText" class="title">{{ titleText }}</h1>
@@ -76,6 +79,10 @@ export default {
       type: String,
       default: '',
     },
+    hideHeader: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     content() {
@@ -85,7 +92,9 @@ export default {
       return this.title || this.$route.meta.title;
     },
     breadList() {
-      return this.breadcrumb.filter((item) => item.path && !item.meta.hideBreadcrumb);
+      return this.breadcrumb.filter(
+        (item) => item.path && !item.meta.hideBreadcrumb
+      );
     },
   },
 };
