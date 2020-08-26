@@ -1,5 +1,6 @@
 import moment from "moment";
 import * as Api from "@/api/monitor";
+import * as Per from "@/api/performance";
 
 const state = {
   projects: [],
@@ -17,7 +18,10 @@ const state = {
     typesTotal: [],
     jsErrorDatas: [],
     assetErrorDatas: []
-  }
+  },
+  performance: [],
+  todayPerformance: {},
+  totalPerformance: {}
 };
 
 const mutations = {
@@ -43,6 +47,24 @@ const actions = {
   async fetchMonitorStatistics({ commit }, pid) {
     const statistics = await Api.statistics(pid);
     commit("SET_MONITOR", { statistics });
+  },
+  async fetchPerList({ commit }, pid) {
+    const { list } = await Per.list({ size: 1000, pid });
+    list.forEach(item => {
+      item.date = moment(item.create_time).format("MM/DD HH:mm:ss");
+      item["加载时间"] = item.load_time;
+      item["白屏时间"] = item.white_time;
+    });
+    commit("SET_MONITOR", {
+      performance: list
+    });
+  },
+  async fetchPerStatistics({ commit }, pid) {
+    const { today = {}, total = {} } = await Per.staticstics({ pid });
+    commit("SET_MONITOR", {
+      todayPerformance: today,
+      totalPerformance: total
+    });
   }
 };
 

@@ -1,34 +1,66 @@
 <template>
   <page-layout>
     <a-card
-      title="数据统计"
+      title="错误统计"
       style="margin-bottom: 20px"
       :extra="statistics.start_time ? `${statistics.start_time} - ${statistics.end_time}` : ''"
       :loading="!isLoad"
     >
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="运行错误(今日)" :value="statistics.jsErrorTodayTotal" />
+        <a-statistic
+          class="item"
+          title="运行错误(今日)"
+          :value="statistics.jsErrorTodayTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="资源错误(今日)" :value="statistics.assetErrorTodayTotal" />
+        <a-statistic
+          class="item"
+          title="资源错误(今日)"
+          :value="statistics.assetErrorTodayTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响人数(今日)" :value="statistics.personEffetTodayTotal" />
+        <a-statistic
+          class="item"
+          title="影响人数(今日)"
+          :value="statistics.personEffetTodayTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响页面(今日)" :value="statistics.fromTodayTotal" />
+        <a-statistic
+          class="item"
+          title="影响页面(今日)"
+          :value="statistics.fromTodayTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="运行错误(总数)" :value="statistics.jsErrorTotal" />
+        <a-statistic
+          class="item"
+          title="运行错误(总数)"
+          :value="statistics.jsErrorTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="资源错误(总数)" :value="statistics.assetErrorTotal" />
+        <a-statistic
+          class="item"
+          title="资源错误(总数)"
+          :value="statistics.assetErrorTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响人数(总数)" :value="statistics.personEffetTotal" />
+        <a-statistic
+          class="item"
+          title="影响人数(总数)"
+          :value="statistics.personEffetTotal"
+        />
       </a-card-grid>
       <a-card-grid style="width:25%;text-align:center">
-        <a-statistic class="item" title="影响页面(总数)" :value="statistics.fromTotal" />
+        <a-statistic
+          class="item"
+          title="影响页面(总数)"
+          :value="statistics.fromTotal"
+        />
       </a-card-grid>
     </a-card>
     <a-row :gutter="12">
@@ -75,16 +107,20 @@ export default {
       user: (state) => state.user.user,
     }),
     assetErrorDatas() {
-      return [...(this.statistics.assetErrorDatas || [])].reverse().map((item) => ({
-        ...item,
-        总数: item.total,
-      }));
+      return [...(this.statistics.assetErrorDatas || [])]
+        .reverse()
+        .map((item) => ({
+          ...item,
+          总数: item.total,
+        }));
     },
     jsErrorDatas() {
-      return [...(this.statistics.jsErrorDatas || [])].reverse().map((item) => ({
-        ...item,
-        总数: item.total,
-      }));
+      return [...(this.statistics.jsErrorDatas || [])]
+        .reverse()
+        .map((item) => ({
+          ...item,
+          总数: item.total,
+        }));
     },
     isLoad() {
       return !!this.statistics.start_time;
